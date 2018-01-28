@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and William Dalby.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -52,6 +52,29 @@ def draw_upside_down_wall(rectangle, n, window):
     # TODO: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
+    top_left_x_start = rectangle.corner_1.x
+    top_left_y_start = rectangle.corner_1.y
+
+    bottom_right_x_start =  rectangle.corner_2.x
+    bottom_right_y_start = rectangle.corner_2.y
+
+    tl_x = top_left_x_start
+    tl_y = top_left_y_start
+
+    br_x = bottom_right_x_start
+    br_y = bottom_right_y_start
+
+    for k in range(n):
+        for i in range(k+1):
+            new_rectangle = rg.Rectangle(rg.Point(tl_x,tl_y), rg.Point(br_x,br_y))
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+            tl_x = tl_x + rectangle.get_width()
+            br_x = br_x + rectangle.get_width()
+        tl_x = top_left_x_start - (rectangle.get_width()/2)*(k+1)
+        br_x = bottom_right_x_start - (rectangle.get_width()/2)*(k+1)
+        tl_y = top_left_y_start - (rectangle.get_height())*(k+1)
+        br_y = bottom_right_y_start - (rectangle.get_height())*(k+1)
 
 
 # ----------------------------------------------------------------------
